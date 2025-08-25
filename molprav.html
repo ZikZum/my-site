@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Молодежное правительство Кировской области</title>
+
+    <!-- БЛОК БЕЗОПАСНОСТИ - НАЧАЛО -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/ https://cdnjs.cloudflare.com/ajax/libs/font-awesome/ 'unsafe-inline' 'unsafe-eval';
+        style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com/ajax/libs/font-awesome/ https://fonts.googleapis.com;
+        img-src 'self' data: https:;
+        font-src 'self' https://cdnjs.cloudflare.com/ajax/libs/font-awesome/ https://fonts.gstatic.com;
+        connect-src 'self' https://api.telegram.org;
+        object-src 'none';
+        base-uri 'self';
+        form-action 'self';
+        frame-ancestors 'none';
+    ">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    <!-- БЛОК БЕЗОПАСНОСТИ - КОНЕЦ -->
+    <!-- Подключение шрифтов -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- QRCode.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <style>
+        /* Основные стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', 'Avenir Next Cyr', Arial, sans-serif;
+        }
+
+        :root {
+            --primary: #7503FE;
+            --secondary: #9519CF;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Шапка */
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(117, 3, 254, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+            header::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+                transform: rotate(30deg);
+            }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            font-size: 18px;
+            font-weight: 500;
+            opacity: 0.9;
+            position: relative;
+        }
+
+        /* Анимированная кнопка меню для мобильных */
+        .menu-toggle {
+            display: none;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+            .menu-toggle i {
+                font-size: 28px;
+                color: white;
+            }
+
+        /* Основной контент */
+        .intro {
+            padding: 80px 0;
+            text-align: center;
+            background: white;
+            margin: 30px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .intro::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 5px;
+                background: var(--gradient);
+            }
+
+            .intro h1 {
+                color: var(--primary);
+                margin-bottom: 25px;
+                font-size: 36px;
+                font-weight: 700;
+                opacity: 0;
+                transform: translateY(20px);
+                transition: all 0.8s ease;
+            }
+
+            .intro p {
+                font-size: 20px;
+                max-width: 800px;
+                margin: 0 auto;
+                color: #555;
+                opacity: 0;
+                transform: translateY(20px);
+                transition: all 0.8s ease 0.3s;
+            }
+
+            .intro.animated h1,
+            .intro.animated p {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        /* Команда */
+        .team {
+            padding: 60px 0;
+            background: linear-gradient(to bottom, #f0e6ff, #ffffff);
+            border-radius: 12px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+            .team h2 {
+                text-align: center;
+                margin-bottom: 40px;
+                color: var(--primary);
+                font-size: 32px;
+                font-weight: 700;
+                position: relative;
+                display: inline-block;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+                .team h2::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -10px;
+                    left: 0;
+                    width: 100%;
+                    height: 3px;
+                    background: var(--gradient);
+                    border-radius: 3px;
+                }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .team-member {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(149, 25, 207, 0.15);
+            transition: all 0.3s ease;
+            text-align: center;
+            border-top: 4px solid var(--secondary);
+            opacity: 0;
+            transform: translateY(20px);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .team-member::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(149, 25, 207, 0.1), transparent);
+                transition: all 0.6s ease;
+            }
+
+            .team-member:hover::before {
+                left: 100%;
+            }
+
+            .team-member.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .team-member:hover {
+                transform: translateY(-5px) scale(1.02);
+                box-shadow: 0 8px 20px rgba(149, 25, 207, 0.25);
+            }
+
+            .team-member h3 {
+                color: var(--secondary);
+                margin-bottom: 12px;
+                font-size: 20px;
+                font-weight: 700;
+            }
+
+            .team-member p {
+                font-size: 16px;
+                color: #666;
+            }
+
+            .team-member .social {
+                margin-top: 15px;
+                opacity: 0;
+                transition: all 0.3s ease;
+            }
+
+            .team-member:hover .social {
+                opacity: 1;
+            }
+
+            .team-member .social a {
+                display: inline-block;
+                width: 36px;
+                height: 36px;
+                background: var(--gradient);
+                color: white;
+                border-radius: 50%;
+                line-height: 36px;
+                margin: 0 5px;
+                transition: all 0.3s ease;
+            }
+
+                .team-member .social a:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 5px 10px rgba(117, 3, 254, 0.3);
+                }
+
+        /* Контакты */
+        .contacts {
+            padding: 60px 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+            .contacts h2 {
+                text-align: center;
+                margin-bottom: 40px;
+                color: var(--primary);
+                font-size: 32px;
+                font-weight: 700;
+                position: relative;
+                display: inline-block;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+                .contacts h2::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -10px;
+                    left: 0;
+                    width: 100%;
+                    height: 3px;
+                    background: var(--gradient);
+                    border-radius: 3px;
+                }
+
+        .contact-info {
+            max-width: 700px;
+            margin: 0 auto;
+            background: linear-gradient(to bottom, #f9f3ff, #ffffff);
+            padding: 35px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(117, 3, 254, 0.1);
+            border-left: 4px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .contact-info::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 5px;
+                height: 100%;
+                background: var(--gradient);
+            }
+
+        .contact-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 30px;
+        }
+
+            .contact-item:last-child {
+                border-bottom: none;
+                margin-bottom: 0;
+                padding-bottom: 0;
+            }
+
+            .contact-item i {
+                position: absolute;
+                left: 0;
+                top: 5px;
+                color: var(--secondary);
+                font-size: 18px;
+            }
+
+            .contact-item strong {
+                color: var(--secondary);
+                font-weight: 700;
+                display: block;
+                margin-bottom: 8px;
+                font-size: 18px;
+            }
+
+        /* Форма обратной связи */
+        .feedback-form {
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+            .feedback-form h3 {
+                color: var(--primary);
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 5px;
+                font-weight: 500;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                width: 100%;
+                padding: 12px 15px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                font-size: 16px;
+                transition: all 0.3s ease;
+            }
+
+                .form-group input:focus,
+                .form-group textarea:focus {
+                    border-color: var(--primary);
+                    box-shadow: 0 0 0 3px rgba(117, 3, 254, 0.1);
+                    outline: none;
+                }
+
+        .btn {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+            .btn:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba(117, 3, 254, 0.3);
+            }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        /* QR-код секция */
+        .qr-section {
+            padding: 60px 0;
+            text-align: center;
+            background: var(--gradient);
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .qr-section::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+                transform: rotate(30deg);
+            }
+
+            .qr-section h2 {
+                margin-bottom: 30px;
+                font-size: 32px;
+                font-weight: 700;
+                position: relative;
+            }
+
+        .qr-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+        }
+
+        #qrcode {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+            #qrcode:hover {
+                transform: scale(1.05);
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+            }
+
+        .qr-text {
+            max-width: 600px;
+            margin: 20px auto 0;
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        /* Футер */
+        footer {
+            background: var(--gradient);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            border-radius: 12px 12px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+            footer::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)" /></svg>');
+                background-size: 100% 100%;
+            }
+
+            footer p {
+                font-size: 16px;
+                opacity: 0.9;
+                position: relative;
+            }
+
+        .social-links {
+            margin: 20px 0;
+            position: relative;
+        }
+
+            .social-links a {
+                display: inline-block;
+                width: 40px;
+                height: 40px;
+                background: rgba(255, 255, 255, 0.1);
+                color: white;
+                border-radius: 50%;
+                line-height: 40px;
+                margin: 0 10px;
+                transition: all 0.3s ease;
+            }
+
+                .social-links a:hover {
+                    background: rgba(255, 255, 255, 0.2);
+                    transform: translateY(-3px);
+                }
+
+        /* Анимации */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animated {
+            animation: fadeIn 1s ease forwards;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .intro h1 {
+                font-size: 28px;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .contact-info {
+                padding: 20px;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .intro, .team, .contacts, .qr-section {
+                margin: 15px 0;
+                padding: 40px 0;
+            }
+        }
+
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+            .modal.active {
+                display: flex;
+                opacity: 1;
+            }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            transform: scale(0.9);
+            transition: all 0.3s ease;
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+            transition: all 0.3s ease;
+        }
+
+            .close-modal:hover {
+                color: var(--primary);
+            }
+
+        /* Прогресс бар прокрутки */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: var(--gradient);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Кнопка "Наверх" */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 4px 15px rgba(117, 3, 254, 0.3);
+        }
+
+            .scroll-to-top.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .scroll-to-top:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 20px rgba(117, 3, 254, 0.4);
+            }
+
+        /* Новые улучшения */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+            .notification.show {
+                opacity: 1;
+            }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+            .btn:disabled:hover {
+                transform: none;
+                box-shadow: none;
+            }
+    </style>
+</head>
+<body>
+    <!-- Прогресс бар прокрутки -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Кнопка "Наверх" -->
+    <div class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Уведомление -->
+    <div class="notification" id="notification"></div>
+
+    <header>
+        <div class="container">
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="logo">МОЛОДЕЖНОЕ ПРАВИТЕЛЬСТВО КИРОВСКОЙ ОБЛАСТИ</div>
+            <div class="subtitle">Консультативно-совещательный орган при Правительстве Кировской области</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="intro" id="intro">
+            <h1>Привет! Мы – команда Молодёжного правительства</h1>
+            <p>Вместе мы расскажем тебе о нашей работе и вовлечем молодежь в решение социально-экономических проблем области</p>
+        </section>
+
+        <section class="team">
+            <h2>Наша команда</h2>
+            <div class="team-grid">
+                <div class="team-member" data-vk-link="https://vk.com/churina_elisaveta">
+                    <h3>Елизавета Чурина</h3>
+                    <p>Председатель Молодежного правительства Кировской области</p>
+                    <div class="social">
+                        <a href="https://vk.com/churina_elisaveta" target="_blank"><i class="fab fa-vk"></i></a>
+                    </div>
+                </div>
+                <div class="team-member" data-vk-link="https://vk.com/ttsepelev">
+                    <h3>Виталий Цепелев</h3>
+                    <p>Заместитель председателя Молодежного правительства Кировской области</p>
+                    <div class="social">
+                        <a href="https://vk.com/ttsepelev" target="_blank"><i class="fab fa-vk"></i></a>
+                    </div>
+                </div>
+                <div class="team-member" data-vk-link="https://vk.com/augustus_electum">
+                    <h3>Арсений Тришин</h3>
+                    <p>Заместитель председателя Молодежного правительства Кировской области</p>
+                    <div class="social">
+                        <a href="https://vk.com/augustus_electum" target="_blank"><i class="fab fa-vk"></i></a>
+                    </div>
+                </div>
+                <div class="team-member" data-vk-link="https://vk.com/an_rusinova">
+                    <h3>Анна Русинова</h3>
+                    <p>Пресс-секретарь Молодежного правительства Кировской области</p>
+                    <div class="social">
+                        <a href="https://vk.com/an_rusinova" target="_blank"><i class="fab fa-vk"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contacts">
+            <h2>Контакты для связи с нами</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <strong>Адрес:</strong> г. Киров, ул. Защитников Отечества
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <strong>Email:</strong> molprav_43@mail.ru
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>О нас:</strong> Молодёжное правительство Кировской области – консультативно-совещательный орган при Правительстве Кировской области. Осуществляет свою деятельность с целью вовлечения молодежи в решение социально-экономических проблем области и участия в формировании кадрового потенциала области.
+                </div>
+
+                <!-- Форма обратной связи -->
+                <div class="feedback-form">
+                    <h3>Обратная связь</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Ваше имя</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Ваш email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Ваш телефон</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Сообщение</label>
+                            <textarea id="message" name="message" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-block" id="submitBtn">
+                            <span id="btnText">Отправить сообщение</span>
+                            <span class="loading" id="btnLoading" style="display: none;"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="qr-section">
+            <h2>Наша группа ВКонтакте</h2>
+            <div class="qr-container">
+                <div id="qrcode"></div>
+                <p class="qr-text">Отсканируйте QR-код, чтобы перейти в нашу группу ВКонтакте и быть в курсе всех событий Молодежного правительства Кировской области</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://vk.com/molprav43" target="_blank"><i class="fab fa-vk"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p>Молодежное правительство Кировской области © 2023</p>
+        </div>
+    </footer>
+
+    <!-- Модальное окно -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h3>Спасибо за ваше сообщение!</h3>
+            <p>Мы свяжемся с вами в ближайшее время.</p>
+        </div>
+    </div>
+
+    <!-- JavaScript код -->
+    <script>
+        // ЗАЩИТНЫЕ ФУНКЦИИ - НАЧАЛО
+        const sanitizeInput = (input) => {
+            const div = document.createElement('div');
+            div.textContent = input;
+            return div.innerHTML;
+        };
+
+        const showNotification = (message, isSuccess = true) => {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.background = isSuccess
+                ? 'linear-gradient(135deg, #28a745, #20c997)'
+                : 'linear-gradient(135deg, #dc3545, #fd7e14)';
+            notification.classList.add('show');
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        };
+        // ЗАЩИТНЫЕ ФУНКЦИИ - КОНЕЦ
+
+        // Конфигурация Telegram бота
+        const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN'; // Замените на токен вашего бота
+        const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID'; // Замените на ваш chat_id (можно получить через @userinfobot)
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Основной URL группы ВКонтакте
+            const vkGroupUrl = 'https://vk.com/molprav43';
+
+            // Создаем QR-код
+            const qrcode = new QRCode(document.getElementById('qrcode'), {
+                text: vkGroupUrl,
+                width: 200,
+                height: 200,
+                colorDark: '#7503FE',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            });
+
+            // Добавляем ссылку на QR-код
+            document.getElementById('qrcode').onclick = function () {
+                window.open(vkGroupUrl, '_blank');
+            };
+
+            // Добавляем обработчики для карточек команды
+            const teamMembers = document.querySelectorAll('.team-member');
+            teamMembers.forEach(member => {
+                member.addEventListener('click', function () {
+                    const vkLink = this.getAttribute('data-vk-link');
+                    if (vkLink) {
+                        window.open(vkLink, '_blank');
+                    }
+                });
+            });
+
+            // Анимация при загрузке страницы
+            setTimeout(() => {
+                document.getElementById('intro').classList.add('animated');
+            }, 300);
+
+            // Анимация появления элементов при прокрутке
+            const animateOnScroll = () => {
+                const teamMembers = document.querySelectorAll('.team-member');
+                const windowHeight = window.innerHeight;
+
+                teamMembers.forEach(member => {
+                    const position = member.getBoundingClientRect().top;
+
+                    if (position < windowHeight - 100) {
+                        member.classList.add('visible');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', animateOnScroll);
+            // Запускаем сразу на случай если элементы уже в области видимости
+            animateOnScroll();
+
+            // Прогресс бар прокрутки
+            const progressBar = document.getElementById('progressBar');
+
+            window.addEventListener('scroll', () => {
+                const windowHeight = window.innerHeight;
+                const documentHeight = document.documentElement.scrollHeight;
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const scrolled = (scrollTop / (documentHeight - windowHeight)) * 100;
+
+                progressBar.style.width = scrolled + '%';
+
+                // Кнопка "Наверх"
+                const scrollToTop = document.getElementById('scrollToTop');
+                if (scrollTop > 500) {
+                    scrollToTop.classList.add('active');
+                } else {
+                    scrollToTop.classList.remove('active');
+                }
+            });
+
+            // Плавная прокрутка к верху страницы
+            document.getElementById('scrollToTop').addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Обработка формы обратной связи
+            const contactForm = document.getElementById('contactForm');
+            const successModal = document.getElementById('successModal');
+            const closeModal = document.getElementById('closeModal');
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnLoading = document.getElementById('btnLoading');
+
+            // Функция отправки данных в Telegram
+            const sendToTelegram = (formData) => {
+                return new Promise((resolve, reject) => {
+                    const message = `
+📧 НОВОЕ СООБЩЕНИЕ С САЙТА
+
+👤 Имя: ${formData.name}
+📧 Email: ${formData.email}
+📞 Телефон: ${formData.phone || 'Не указан'}
+💬 Сообщение:
+${formData.message}
+
+📅 ${new Date().toLocaleString('ru-RU')}
+                            `;
+
+                    const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+
+                    const options = {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            chat_id: TELEGRAM_CHAT_ID,
+                            text: message,
+                            parse_mode: 'HTML'
+                        })
+                    };
+
+                    fetch(url, options)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.ok) {
+                                resolve(data);
+                            } else {
+                                reject(data);
+                            }
+                        })
+                        .catch(error => reject(error));
+                });
+            };
+
+            contactForm.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                // Санитизация вводимых данных
+                const name = sanitizeInput(this.name.value);
+                const email = sanitizeInput(this.email.value);
+                const phone = sanitizeInput(this.phone.value);
+                const message = sanitizeInput(this.message.value);
+
+                // Валидация email
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    showNotification('Пожалуйста, введите корректный email адрес', false);
+                    return;
+                }
+
+                // Показываем индикатор загрузки
+                btnText.style.display = 'none';
+                btnLoading.style.display = 'inline-block';
+                submitBtn.disabled = true;
+
+                try {
+                    // Отправляем данные в Telegram
+                    await sendToTelegram({ name, email, phone, message });
+
+                    // Показываем модальное окно успеха
+                    successModal.classList.add('active');
+                    showNotification('Сообщение успешно отправлено!', true);
+
+                } catch (error) {
+                    console.error('Ошибка отправки:', error);
+                    showNotification('Ошибка отправки сообщения. Попробуйте позже.', false);
+                } finally {
+                    // Восстанавливаем кнопку
+                    btnText.style.display = 'inline-block';
+                    btnLoading.style.display = 'none';
+                    submitBtn.disabled = false;
+
+                    // Очищаем форму
+                    contactForm.reset();
+                }
+            });
+
+            // Закрытие модального окна
+            closeModal.addEventListener('click', () => {
+                successModal.classList.remove('active');
+            });
+
+            // Закрытие модального окна при клике вне его
+            window.addEventListener('click', (e) => {
+                if (e.target === successModal) {
+                    successModal.classList.remove('active');
+                }
+            });
+
+            // Параллакс эффект для некоторых элементов
+            const introSection = document.getElementById('intro');
+
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset;
+                introSection.style.backgroundPosition = `center ${scrollTop * 0.5}px`;
+            });
+
+            // Инициализация анимации для всех элементов с задержкой
+            const animatedElements = document.querySelectorAll('.intro, .team-member');
+            animatedElements.forEach((el, index) => {
+                el.style.transitionDelay = `${index * 0.2}s`;
+            });
+
+            // Добавляем обработчик для мобильного меню
+            const menuToggle = document.getElementById('menuToggle');
+            menuToggle.addEventListener('click', function () {
+                const header = document.querySelector('header');
+                header.classList.toggle('menu-open');
+
+                // Анимация иконки меню
+                const icon = this.querySelector('i');
+                if (header.classList.contains('menu-open')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                    // Здесь можно добавить логику для открытия меню
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+
+            // Добавляем обработку пустых токенов Telegram
+            if (TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN' || TELEGRAM_CHAT_ID === 'YOUR_CHAT_ID') {
+                console.warn('Telegram бот не настроен. Замените TELEGRAM_BOT_TOKEN и TELEGRAM_CHAT_ID на реальные значения.');
+
+                // Переопределяем функцию отправки для демонстрации
+                window.sendToTelegram = async function (formData) {
+                    // Имитация задержки сети
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+
+                    // В демо-режиме просто показываем данные в консоли
+                    console.log('Демо-режим: данные формы', formData);
+                    return { ok: true };
+                };
+            }
+        });
+
+        // Дополнительные функции для улучшения UX
+        // Предзагрузка критически важных ресурсов
+        function preloadCriticalResources() {
+            const resources = [
+                'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
+                'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap'
+            ];
+
+            resources.forEach(resource => {
+                const link = document.createElement('link');
+                link.rel = 'preload';
+                link.href = resource;
+                link.as = 'style';
+                document.head.appendChild(link);
+            });
+        }
+
+        // Оптимизация для медленных соединений
+        if ('connection' in navigator) {
+            const connection = navigator.connection;
+            if (connection.saveData || connection.effectiveType.includes('2g')) {
+                // Упрощаем анимации для медленных соединений
+                document.documentElement.classList.add('save-data');
+            }
+        }
+
+        // Запускаем предзагрузку
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', preloadCriticalResources);
+        } else {
+            preloadCriticalResources();
+        }
+    </script>
+
+    <style>
+        /* Дополнительные стили для улучшений */
+        .save-data .team-member,
+        .save-data .intro {
+            animation: none !important;
+            transition: none !important;
+        }
+
+            .save-data .social-links a,
+            .save-data .team-member .social a {
+                animation: none;
+            }
+
+        header.menu-open {
+            height: auto;
+            min-height: 100vh;
+        }
+
+            header.menu-open .container {
+                padding-bottom: 2rem;
+            }
+
+        /* Оптимизация для печати */
+        @media print {
+            .social-links,
+            .menu-toggle,
+            .scroll-to-top,
+            .progress-container,
+            .feedback-form,
+            .qr-section {
+                display: none !important;
+            }
+
+            .team-member {
+                break-inside: avoid;
+            }
+
+            body {
+                background: white !important;
+                color: black !important;
+            }
+
+            header {
+                background: #7503FE !important;
+                color: white !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        /* Улучшение доступности */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Фокус для доступности */
+        a:focus,
+        button:focus,
+        input:focus,
+        textarea:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        /* Высококонтрастный режим */
+        @media (prefers-contrast: high) {
+            :root {
+                --primary: #000000;
+                --secondary: #000000;
+            }
+
+            .team-member {
+                border: 2px solid black;
+            }
+        }
+    </style>
+</body>
+</html>
