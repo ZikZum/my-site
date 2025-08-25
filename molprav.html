@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Молодёжное правительство Кировской области</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #9519CF;
+            --primary-dark: #7503FE;
+            --dark: #0f172a;
+            --darker: #0a0f1c;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --success: #22c55e;
+            --error: #ef4444;
+            --card-bg: rgba(30, 41, 59, 0.4);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            color: var(--light);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-attachment: fixed;
+        }
+
+        header {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+            header h1 {
+                margin: 0;
+                font-weight: 700;
+                font-size: 2rem;
+                background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                letter-spacing: 0.05em;
+            }
+
+            header p {
+                color: var(--gray);
+                margin-top: 0.5rem;
+                font-size: 1rem;
+                font-weight: 300;
+            }
+
+        main {
+            flex: 1;
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            width: 100%;
+        }
+
+        section {
+            margin-bottom: 3rem;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+            section:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            }
+
+        h2 {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--primary);
+            color: var(--light);
+        }
+
+            h2 i {
+                color: var(--primary);
+                font-size: 1.35rem;
+            }
+
+        .people-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .person-card {
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 12px;
+            padding: 1.2rem;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+            .person-card:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 20px rgba(149, 25, 207, 0.15);
+                border-color: rgba(149, 25, 207, 0.3);
+            }
+
+            .person-card a {
+                color: var(--light);
+                text-decoration: none;
+                font-weight: 500;
+                transition: var(--transition);
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+                .person-card a:hover {
+                    color: var(--primary);
+                }
+
+            .person-card i {
+                font-size: 0.9rem;
+                color: var(--primary);
+            }
+
+        .qr-section {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .qr-code {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            padding: 12px;
+        }
+
+            .qr-code:hover {
+                transform: scale(1.05);
+                box-shadow: 0 8px 25px rgba(149, 25, 207, 0.25);
+            }
+
+            .qr-code img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+
+            .qr-code::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                border-radius: 12px;
+                padding: 2px;
+                background: linear-gradient(45deg, var(--primary), var(--primary-dark), transparent);
+                -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+                -webkit-mask-composite: xor;
+                mask-composite: exclude;
+            }
+
+        .qr-link {
+            flex: 1;
+            min-width: 250px;
+        }
+
+            .qr-link a {
+                color: var(--light);
+                text-decoration: none;
+                font-weight: 500;
+                font-size: 1.1rem;
+                transition: var(--transition);
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.8rem 1.5rem;
+                background: rgba(30, 41, 59, 0.6);
+                border-radius: 12px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+                .qr-link a:hover {
+                    color: var(--primary);
+                    border-color: var(--primary);
+                    transform: translateY(-2px);
+                }
+
+        .btn {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 0.9rem 1.8rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 6px rgba(149, 25, 207, 0.25);
+        }
+
+            .btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 12px rgba(149, 25, 207, 0.3);
+                background: linear-gradient(90deg, var(--primary-dark) 0%, #5d02c9 100%);
+            }
+
+        .feedback-form {
+            max-width: 500px;
+            margin-top: 1.5rem;
+            background: rgba(30, 41, 59, 0.6);
+            padding: 2rem;
+            border-radius: 16px;
+            display: none;
+            flex-direction: column;
+            gap: 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feedback-form.visible {
+            display: flex;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+            .form-group label {
+                font-weight: 500;
+                font-size: 0.95rem;
+                color: var(--gray);
+            }
+
+        .feedback-form input, .feedback-form textarea {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(15, 23, 42, 0.6);
+            color: var(--light);
+            font-size: 1rem;
+            resize: vertical;
+            transition: var(--transition);
+        }
+
+            .feedback-form input:focus, .feedback-form textarea:focus {
+                outline: none;
+                border-color: var(--primary);
+                box-shadow: 0 0 0 3px rgba(149, 25, 207, 0.2);
+            }
+
+            .feedback-form input::placeholder, .feedback-form textarea::placeholder {
+                color: var(--gray);
+            }
+
+        .feedback-form button {
+            align-self: flex-start;
+            margin-top: 0.5rem;
+        }
+
+        #statusMsg {
+            font-size: 0.95rem;
+            min-height: 1.3em;
+            padding: 0.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .success {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--success);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .error {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--error);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .info {
+            background: rgba(149, 25, 207, 0.15);
+            color: var(--primary);
+            border: 1px solid rgba(149, 25, 207, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            background: rgba(15, 23, 42, 0.8);
+            color: var(--gray);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.7rem;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+
+            .people-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .qr-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .qr-link {
+                width: 100%;
+            }
+
+            .feedback-form {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            header p {
+                font-size: 0.9rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            section {
+                padding: 1.2rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Молодёжное правительство Кировской области</h1>
+        <p>Мы - команда молодых инициативных людей, работающих на благо региона</p>
+    </header>
+
+    <main>
+        <section>
+            <h2><i class="fas fa-users"></i> Наша команда</h2>
+            <div class="people-grid">
+                <div class="person-card">
+                    <a href="https://m.vk.com/churina_elisaveta" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-user"></i> Чурина Елизавета
+                    </a>
+                </div>
+                <div class="person-card">
+                    <a href="https://m.vk.com/ttsepelev" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-user"></i> Виталий Цепелев
+                    </a>
+                </div>
+                <div class="person-card">
+                    <a href="https://m.vk.com/augustus_electum" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-user"></i> Арсений Тришин
+                    </a>
+                </div>
+                <div class="person-card">
+                    <a href="https://m.vk.com/an_rusinova" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-user"></i> Анна Русинова
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2><i class="fas fa-qrcode"></i> QR код и ссылки</h2>
+            <div class="qr-section">
+                <div class="qr-code">
+                    <a href="https://m.vk.com/molprav43" target="_blank" rel="noopener noreferrer" aria-label="Молодёжное правительство Кировской области ВКонтакте">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://m.vk.com/molprav43&color=9519CF&bgcolor=0f172a&margin=10&qzone=1" alt="QR код Молодёжного правительства Кировской области">
+                    </a>
+                </div>
+                <div class="qr-link">
+                    <a href="https://m.vk.com/molprav43" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-vk"></i> https://m.vk.com/molprav43
+                    </a>
+                    <p style="margin-top: 10px; color: var(--gray); font-size: 0.9rem;">
+                        Отсканируйте QR-код, чтобы перейти в наше сообщество ВКонтакте
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2><i class="fas fa-envelope"></i> Обратная связь</h2>
+            <button id="feedbackBtn" class="btn" type="button">
+                <i class="fas fa-paper-plane"></i> Написать нам
+            </button>
+            <form id="feedbackForm" class="feedback-form" novalidate>
+                <div class="form-group">
+                    <label for="name">Ваше имя</label>
+                    <input type="text" id="name" name="name" placeholder="Представьтесь, пожалуйста" required autocomplete="off" minlength="2" maxlength="40">
+                </div>
+                <div class="form-group">
+                    <label for="message">Сообщение</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Что вы хотите нам сообщить?" required minlength="5" maxlength="500"></textarea>
+                </div>
+                <button type="submit" class="btn">
+                    <i class="fas fa-paper-plane"></i> Отправить
+                </button>
+                <div id="statusMsg"></div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2025 Молодёжное правительство Кировской области
+    </footer>
+
+    <script>
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function () {
+            const token = '7850492321:AAHKy9n-NdRULoAvBon_yL5liUgEIG8h_AQ';
+            const chatId = '8021764340';
+
+            const feedbackBtn = document.getElementById('feedbackBtn');
+            const form = document.getElementById('feedbackForm');
+            const statusMsg = document.getElementById('statusMsg');
+
+            feedbackBtn.addEventListener('click', () => {
+                form.classList.toggle('visible');
+                if (form.classList.contains('visible')) {
+                    form.querySelector('#name').focus();
+                }
+                statusMsg.textContent = '';
+                statusMsg.className = '';
+            });
+
+            form.addEventListener('submit', async e => {
+                e.preventDefault();
+                statusMsg.className = 'info';
+                statusMsg.textContent = 'Отправляем ваше сообщение...';
+
+                const name = form.name.value.trim();
+                const message = form.message.value.trim();
+
+                if (name.length < 2 || message.length < 5) {
+                    statusMsg.className = 'error';
+                    statusMsg.textContent = 'Пожалуйста, заполните все поля корректно.';
+                    return;
+                }
+
+                const text = encodeURIComponent(`Новое сообщение с сайта:\nИмя: ${name}\nСообщение: ${message}`);
+
+                try {
+                    const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${text}`, {
+                        method: 'GET'
+                    });
+
+                    if (res.ok) {
+                        statusMsg.className = 'success';
+                        statusMsg.textContent = 'Сообщение успешно отправлено! Скоро мы с вами свяжемся.';
+                        form.reset();
+                        setTimeout(() => {
+                            form.classList.remove('visible');
+                            statusMsg.textContent = '';
+                            statusMsg.className = '';
+                        }, 3000);
+                    } else {
+                        throw new Error('Ошибка отправки');
+                    }
+                } catch {
+                    statusMsg.className = 'error';
+                    statusMsg.textContent = 'Ошибка при отправке. Пожалуйста, попробуйте позже.';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
